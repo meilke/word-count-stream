@@ -1,8 +1,7 @@
 module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
-  grunt.loadTasks('tasks');
-
+  
   var files = [ 'src/**/*.js', 'test/**/*.spec.js', 'Gruntfile.js' ];
 
   grunt.initConfig({
@@ -13,6 +12,7 @@ module.exports = function(grunt) {
         node: true,
         indent: 2,
         unused: true,
+        esnext: true,
         nomen: true
       }
     },
