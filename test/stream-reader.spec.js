@@ -1,16 +1,7 @@
 var expect = require('expect.js'),
-  promise = require('bluebird'),
   streamReader = require('../src/stream-reader')(),
+  stringStream = require('../src/streams/string-stream')(),
   httpStream = require('../src/streams/http-stream')();
-
-function createFromString(text) {
-  return new promise(function (resolve) {
-    var s = new require('stream').Readable();
-    s.push(text);
-    s.push(null);
-    resolve(s);
-  });
-}
 
 describe('The stream reader', function () {
 
@@ -20,7 +11,7 @@ describe('The stream reader', function () {
       atOnce: 20
     };
     streamReader
-      .process(createFromString('The quick brown fox jumps over the lazy dog'), options)
+      .process(stringStream.createFromString('The quick brown fox jumps over the lazy dog'), options)
       .then(function (result) {
         expect(result.the).to.be(2);
         expect(result.quick).to.be(1);
