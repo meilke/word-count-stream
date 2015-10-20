@@ -3,10 +3,16 @@ var streamReader = require('./src/stream-reader')(),
   stringStream = require('./src/streams/string-stream')(),
   argv = require('yargs').argv,
   request = require('request-promise'),
-  _ = require('lodash');
+  random = require('randomstring'),
+  _ = require('lodash'),
+  size = argv.size || 1024;
 
 function processFromUrl(options) {
   return streamReader.process(httpStream.createFromUrl(argv.url), options);
+}
+
+function processFromRandomString(options) {
+  return streamReader.process(stringStream.createFromString(random.generate(size)), options);
 }
 
 function processFromRandomOrg(options) {
@@ -19,7 +25,7 @@ function processFromRandomOrg(options) {
         params: {
           apiKey: 'e200488f-4774-4283-9e92-ca567875afb9',
           n: 1,
-          size: argv.size || 1024
+          size: size
         },
         id: 42
       },
@@ -42,6 +48,8 @@ function processData() {
     return processFromUrl(options);
   } else if (argv.randomOrg) {
     return processFromRandomOrg(options);
+  } else if (argv.random) {
+    return processFromRandomString(options);
   }
 }
 

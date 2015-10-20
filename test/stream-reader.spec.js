@@ -1,11 +1,13 @@
 var expect = require('expect.js'),
   streamReader = require('../src/stream-reader')(),
   stringStream = require('../src/streams/string-stream')(),
-  httpStream = require('../src/streams/http-stream')();
+  httpStream = require('../src/streams/http-stream')(),
+  random = require('randomstring'),
+  _ = require('lodash');
 
 describe('The stream reader', function () {
 
-  it('can read from a string stream', function (done) {
+  it('can read from a normal string stream', function (done) {
     var options = {
       separator: ' ',
       atOnce: 20
@@ -21,6 +23,19 @@ describe('The stream reader', function () {
         expect(result.over).to.be(1);
         expect(result.lazy).to.be(1);
         expect(result.dog).to.be(1);
+      })
+      .finally(done);
+  });
+
+  it('can read from a random string stream', function (done) {
+    var options = {
+      separator: '9',
+      atOnce: 20
+    };
+    streamReader
+      .process(stringStream.createFromString(random.generate(20000)), options)
+      .then(function (result) {
+        expect(_.keys(result).length).to.be.greaterThan(10);
       })
       .finally(done);
   });
