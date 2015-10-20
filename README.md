@@ -1,5 +1,7 @@
 [![Build Status](https://api.travis-ci.org/meilke/word-count-stream.png)](https://travis-ci.org/meilke/word-count-stream)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)  
+[![Code Climate](https://codeclimate.com/github/meilke/word-count-stream/badges/gpa.svg)](https://codeclimate.com/github/meilke/word-count-stream)
+[![Test Coverage](https://codeclimate.com/github/meilke/word-count-stream/badges/coverage.svg)](https://codeclimate.com/github/meilke/word-count-stream/coverage)  
 [![forthebadge](http://forthebadge.com/images/badges/uses-badges.svg)](http://forthebadge.com)
 
 # word-count-stream
