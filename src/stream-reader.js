@@ -11,19 +11,41 @@ function add(result, term) {
   }
 }
 
-function process(stream) {
-  return new promise(function (resolve) {
-    var result = {};
-    stream.on('readable', function() {
-      var chunk;
-      while (null !== (chunk = stream.read(100))) {
-        var chunkAsString = chunk.toString().toLowerCase();
-        var chunkSplit = chunkAsString.split(' ');
-        _.each(chunkSplit, _.partial(add, result));
-      }
-    });
-    stream.on('end', function() {
-      resolve(result);
+function process(streamPromise) {
+  return streamPromise.then(function (stream) {
+    return new promise(function (resolve) {
+      var result = {},
+        partialEnd;
+
+      stream.on('readable', function() {
+        var chunk;
+        while (null !== (chunk = stream.read(100))) {
+          var chunkAsString = chunk.toString().toLowerCase().replace(/(\r\n|\n|\r)/gm, '');
+          var chunkSplit = chunkAsString.split(' ');
+
+          var last = chunkSplit[chunkSplit.length - 1];
+          var first = chunkSplit[0];
+
+          if (partialEnd) {
+            add(result, partialEnd + first);
+          }
+
+          if (_.endsWith(chunkAsString, last)) {
+            partialEnd = last;
+            chunkSplit.pop();
+          } else {
+            partialEnd = undefined;
+          }
+
+          _.each(chunkSplit, _.partial(add, result));
+        }
+      });
+      stream.on('end', function() {
+        if (partialEnd) {
+          add(result, partialEnd);
+        }
+        resolve(result);
+      });
     });
   });
 }
