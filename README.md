@@ -4,4 +4,29 @@
 
 # word-count-stream
 
-Counting the words in a stream
+Counts the words in a stream.
+
+## Setup
+
+`npm install`
+
+## Tests
+
+1. `npm install -g grunt-cli`
+2. `grunt`
+
+## From a file off the interwebs
+
+`node index.js --url=http://textfiles.com/etext/REFERENCE/john-magna-413.txt`
+
+## Random data from random.org
+
+`node index.js --randomOrg --size=4096`
+
+## More options
+
+Enable forced garbage collection per each stream read by passing `--expose-gc` to allow for more efficient processing.
+
+Set the chunk size per each stream read by passing `--atOnce=<your_number_goes_here>`.
+
+Set the word separator by passing `--separator=<your_separator>`.
