@@ -4,7 +4,11 @@ var streamReader = require('./src/stream-reader')(),
   _ = require('lodash');
 
 function processData() {
-  return streamReader.process(httpStream.createFromUrl(argv.input));
+  var options = {
+    separator: argv.separator || ' ',
+    atOnce: argv.atOnce || 1000
+  };
+  return streamReader.process(httpStream.createFromUrl(argv.input), options);
 }
 
 processData()

@@ -1,8 +1,7 @@
 'use strict';
 
 var _ = require('lodash'),
-  promise = require('bluebird'),
-  atOnce = 1000;
+  promise = require('bluebird');
 
 function add(result, term) {
   if (result[term]) {
@@ -12,7 +11,7 @@ function add(result, term) {
   }
 }
 
-function process(streamPromise) {
+function process(streamPromise, options) {
   return streamPromise.then(function (stream) {
     return new promise(function (resolve) {
       var result = {},
@@ -20,9 +19,9 @@ function process(streamPromise) {
 
       stream.on('readable', function() {
         var chunk;
-        while (null !== (chunk = stream.read(atOnce))) {
-          var chunkAsString = chunk.toString().toLowerCase().replace(/(\r\n|\n|\r)/gm, ' ');
-          var chunkSplit = chunkAsString.split(' ');
+        while (null !== (chunk = stream.read(options.atOnce))) {
+          var chunkAsString = chunk.toString().toLowerCase().replace(/(\r\n|\n|\r)/gm, options.separator);
+          var chunkSplit = chunkAsString.split(options.separator);
 
           var last = chunkSplit[chunkSplit.length - 1];
           var first = chunkSplit[0];

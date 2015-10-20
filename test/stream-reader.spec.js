@@ -15,8 +15,12 @@ function createFromString(text) {
 describe('The stream reader', function () {
 
   it('can read from a string stream', function (done) {
+    var options = {
+      separator: ' ',
+      atOnce: 20
+    };
     streamReader
-      .process(createFromString('The quick brown fox jumps over the lazy dog'))
+      .process(createFromString('The quick brown fox jumps over the lazy dog'), options)
       .then(function (result) {
         expect(result.the).to.be(2);
         expect(result.quick).to.be(1);
@@ -32,8 +36,12 @@ describe('The stream reader', function () {
 
   it('can read from a HTTP stream', function (done) {
     this.timeout(60000);
+    var options = {
+      separator: ' ',
+      atOnce: 1000
+    };
     streamReader
-      .process(httpStream.createFromUrl('http://textfiles.com/etext/REFERENCE/feder15.txt'))
+      .process(httpStream.createFromUrl('http://textfiles.com/etext/REFERENCE/feder15.txt'), options)
       .then(function (result) {
         expect(result.your).to.be(34);
       })
