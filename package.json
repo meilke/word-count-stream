@@ -1,0 +1,19 @@
+{
+  "name": "word-count-stream",
+  "version": "1.0.0",
+  "description": "Counting the words in a stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meilke/word-count-stream.git"
+  },
+  "author": "Christian Meilke",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/meilke/word-count-stream/issues"
+  },
+  "homepage": "https://github.com/meilke/word-count-stream#readme"
+}
