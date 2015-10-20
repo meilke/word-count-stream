@@ -20,7 +20,7 @@ function process(streamPromise) {
       stream.on('readable', function() {
         var chunk;
         while (null !== (chunk = stream.read(100))) {
-          var chunkAsString = chunk.toString().toLowerCase().replace(/(\r\n|\n|\r)/gm, '');
+          var chunkAsString = chunk.toString().toLowerCase().replace(/(\r\n|\n|\r)/gm, ' ');
           var chunkSplit = chunkAsString.split(' ');
 
           var last = chunkSplit[chunkSplit.length - 1];

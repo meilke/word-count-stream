@@ -1,6 +1,7 @@
 var expect = require('expect.js'),
   promise = require('bluebird'),
-  streamReader = require('../src/stream-reader')();
+  streamReader = require('../src/stream-reader')(),
+  _ = require('lodash');
 
 function createFromString(text) {
   return new promise(function (resolve) {
@@ -33,19 +34,18 @@ describe('The stream reader', function () {
         expect(result.over).to.be(1);
         expect(result.lazy).to.be(1);
         expect(result.dog).to.be(1);
-        done();
-      });
+      })
+      .finally(done);
   });
 
   it('can read from a HTTP stream', function (done) {
+    this.timeout(60000);
     streamReader
-      .process(createFromUrl('http://textfiles.com/stories/alissadl.txt'))
+      .process(createFromUrl('http://textfiles.com/etext/REFERENCE/feder15.txt'))
       .then(function (result) {
-        expect(result.your).to.be(3);
-        expect(result.people).to.be(2);
-        expect(result.splendour).to.be(1);
-        done();
-      });
+        expect(result.your).to.be(34);
+      })
+      .finally(done);
   });
 
 });
