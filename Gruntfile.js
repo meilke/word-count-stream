@@ -2,11 +2,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-mocha-test');
   
-  var files = [ 'src/**/*.js', 'test/**/*.spec.js', 'Gruntfile.js' ];
-
   grunt.initConfig({
     jshint: {
-      files: files,
+      files: [ 'src/**/*.js', 'test/**/*.spec.js', 'Gruntfile.js', 'index.js' ],
       options: {
         quotmark : 'single',
         node: true,
@@ -19,7 +17,7 @@ module.exports = function(grunt) {
     mochaTest: {
       test: {
         options: { reporter: 'spec' },
-        src: files
+        src: [ 'src/**/*.js', 'test/**/*.spec.js' ]
       }
     }
   });

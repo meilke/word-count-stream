@@ -1,6 +1,7 @@
 var expect = require('expect.js'),
   promise = require('bluebird'),
-  streamReader = require('../src/stream-reader')();
+  streamReader = require('../src/stream-reader')(),
+  httpStream = require('../src/streams/http-stream')();
 
 function createFromString(text) {
   return new promise(function (resolve) {
@@ -8,14 +9,6 @@ function createFromString(text) {
     s.push(text);
     s.push(null);
     resolve(s);
-  });
-}
-
-function createFromUrl(url) {
-  return new promise(function (resolve) {
-    require('http').get(url, function (response) {
-      resolve(response);
-    });
   });
 }
 
@@ -40,7 +33,7 @@ describe('The stream reader', function () {
   it('can read from a HTTP stream', function (done) {
     this.timeout(60000);
     streamReader
-      .process(createFromUrl('http://textfiles.com/etext/REFERENCE/feder15.txt'))
+      .process(httpStream.createFromUrl('http://textfiles.com/etext/REFERENCE/feder15.txt'))
       .then(function (result) {
         expect(result.your).to.be(34);
       })

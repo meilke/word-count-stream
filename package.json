@@ -2,7 +2,7 @@
   "name": "word-count-stream",
   "version": "1.0.0",
   "description": "Counting the words in a stream",
-  "main": "src/index.js",
+  "main": "index.js",
   "scripts": {
     "test": "grunt"
   },
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "bluebird": "^2.10.2",
-    "lodash": "^3.10.1"
+    "lodash": "^3.10.1",
+    "yargs": "^3.27.0"
   }
 }
