@@ -1,7 +1,6 @@
 var expect = require('expect.js'),
   promise = require('bluebird'),
-  streamReader = require('../src/stream-reader')(),
-  _ = require('lodash');
+  streamReader = require('../src/stream-reader')();
 
 function createFromString(text) {
   return new promise(function (resolve) {
