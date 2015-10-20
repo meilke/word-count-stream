@@ -3,7 +3,11 @@ node_js:
   - "4.0"
 before_install:
   - npm install -g grunt-cli
+  - npm install -g istanbul
+  - npm install -g codeclimate-test-reporter
 install:
   - npm install
 before_script:
   - grunt
+  - istanbul cover node_modules/mocha/bin/_mocha -- -R spec
+  - CODECLIMATE_REPO_TOKEN=378a08da5174a12eda7e0e0472a4e5a8226e72876a740523393b15409e4b3bbb codeclimate-test-reporter < coverage/lcov.info
