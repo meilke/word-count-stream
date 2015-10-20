@@ -23,7 +23,11 @@ Counts the words in a stream.
 
 ## Random data from random.org
 
-`node index.js --randomOrg --size=4096`
+`node index.js --randomOrg --separator=9 --size=4096`
+
+## Random data self-generated
+
+`node index.js --random --separator=9 --size=4096`
 
 ## More options
 
