@@ -17,7 +17,7 @@ function process(stream) {
     stream.on('readable', function() {
       var chunk;
       while (null !== (chunk = stream.read(100))) {
-        var chunkAsString = chunk.toString();
+        var chunkAsString = chunk.toString().toLowerCase();
         var chunkSplit = chunkAsString.split(' ');
         _.each(chunkSplit, _.partial(add, result));
       }
